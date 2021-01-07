@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài thi modul1</title>
+</head>
+<body>
+<h2>Bài 1:Tìm Max</h2>
+<button type="button" onclick="bai1()">Check</button>
+<hr>
+<h2>Bài 2:Xóa index.value in array</h2>
+<button type="button" onclick="bai2()">check</button>
+<hr>
+<h2>Bài 3:check số nguyên</h2>
+<button type="button" onclick="bai3()">check</button>
+<hr>
+<h2>Bài 4:Vẽ hình tròn</h2>
+<canvas id="c1" style="width: 300px;height: 200px;border: red 1px solid"></canvas>
+<br>
+<button type="button" onclick="bai4()">check</button>
+</body>
+</html>
+<script>
+    function bai1(){
+        let arrs = [];
+        let a = prompt('Nhập độ dài của mảng');
+        for (let i = 0; i < a; i++) {
+            arrs.push(parseInt(Math.random()*100));
+        }
+        console.log(arrs);
+        console.log("số lớn nhất là: "+findMax(arrs));
+        function findMax(arr){
+        let max = arr[0];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i]>max){
+                max = arr[i];
+            }
+        }
+       return max;
+    }
+    }
+    function bai2(){
+        let arrs = [];
+        let a = prompt('Nhập độ dài của mảng');
+        let b = prompt('Số muốn xóa trong array');
+        for (let i = 0; i < a; i++) {
+            arrs.push(parseInt(Math.random()*10));
+        }
+        console.log("mảng ban đầu là: "+arrs);
+        console.log("số  nguyên muốn xóa trong mảng"+b);
+        console.log("mảng sau khi thực thi: "+tryRemoveFromArray(arrs,b));
+        function tryRemoveFromArray(arr,num){
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i]==num){
+                    arr.splice(i,1);
+                }
+            }
+            return arr;
+        }
+    }
+
+    function bai3() {
+        let a = prompt("nhập số nguyên muốn check");
+        console.log(isFibonacci(a));
+
+        function isFibonacci(num) {
+            let d = 0;
+            let b = 1;
+            let c;
+            for (let i = 1; i < num; i++) {
+                c = d + b;
+                d = b;
+                b = c;
+                if (num == c) {
+                   return num+ " thuộc dãy Fibonacci";
+                }
+            }
+            return num + "Không thuộc dãy Fibonacci";
+        }
+    }
+    function bai4(){
+        function circle(x,y,R,color){
+            this.x = x;
+            this.y = y;
+            this.R = R;
+            this.Color = color;
+            this.render = function (){
+                let c = document.getElementById("c1");
+                let ctx = c.getContext('2d');
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.R,0,2*Math.PI);
+                ctx.fillStyle = this.Color;
+                ctx.fill();
+                ctx.stroke();
+            }
+        }
+        let check = new circle(10,10,100,"#000000")
+        check.render()
+    }
+</script>
